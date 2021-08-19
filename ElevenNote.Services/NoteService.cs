@@ -25,8 +25,8 @@ namespace ElevenNote.Services
                     OwnerId = _userId,
                     Title = model.Title,
                     Content = model.Content,
-                    CreatedUtc = DateTimeOffset.Now,
-                    CategoryID = model.CategoryID
+                    CategoryID = model.CategoryID,
+                    CreatedUtc = DateTimeOffset.Now
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -101,7 +101,7 @@ namespace ElevenNote.Services
                 var entity =
                     ctx
                         .Notes
-                        .Single(e => e.NoteId == noteId && e.OwnerId == _userId);
+                        .SingleOrDefault(e => e.NoteId == noteId && e.OwnerId == _userId);
 
                 ctx.Notes.Remove(entity);
 

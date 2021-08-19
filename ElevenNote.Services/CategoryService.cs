@@ -10,7 +10,6 @@ namespace ElevenNote.Services
 {
     public class CategoryService
     {
-
         public bool CreateCategory(CategoryCreate model)
         {
             var entity =
@@ -40,7 +39,7 @@ namespace ElevenNote.Services
                                 {
                                     CategoryID = e.CategoryID,
                                     CategoryName = e.CategoryName
-                                });
+                                }).ToList();
 
                 return query.ToArray();
             }
@@ -55,6 +54,12 @@ namespace ElevenNote.Services
                     ctx
                         .Categories
                         .Single(e => e.CategoryID == id);
+
+                if(entity == null)
+                {
+                    return null;
+                }
+
                 return
                     new CategoryDetail
                     {

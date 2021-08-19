@@ -15,7 +15,9 @@ namespace ElevenNote.Data
         public int CategoryID { get; set; }
 
         [Required]
-        [Display(Name="CategoryName")]
+        [Display(Name ="Category Name")]
         public string CategoryName { get; set; }
+
+        public virtual List<Note> Notes { get; set; } = new List<Note>();
     }
 }
