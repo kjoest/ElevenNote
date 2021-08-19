@@ -23,12 +23,16 @@ namespace ElevenNote.Data
         public string Content { get; set; }
 
         [Required]
+        [Display(Name ="Date Created")]
         public DateTimeOffset CreatedUtc { get; set; }
 
+        [Display(Name ="Date Modified")]
         public DateTimeOffset? ModifiedUtc { get; set; }
 
         [ForeignKey(nameof(Category))]
+        // ForeignKey
         public int CategoryID { get; set; }
+        // Navigational Property
         public virtual Category Category { get; set; }
 
     }

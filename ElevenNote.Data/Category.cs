@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -14,13 +15,7 @@ namespace ElevenNote.Data
         public int CategoryID { get; set; }
 
         [Required]
-        public Guid CategoriesID { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-
-        [ForeignKey(nameof(Note))]
-        public int NoteId { get; set; }
-        public virtual Note Note { get; set; }
+        [Display(Name="CategoryName")]
+        public string CategoryName { get; set; }
     }
 }

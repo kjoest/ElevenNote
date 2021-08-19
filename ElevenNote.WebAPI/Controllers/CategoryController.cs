@@ -1,6 +1,5 @@
 ﻿using ElevenNote.Models;
 using ElevenNote.Services;
-using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,19 +23,12 @@ namespace ElevenNote.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var service = CreateCategoryService();
+            var categoryService = CreateCategoryService();
 
-            if (!service.CreateCategory(category))
+            if (!categoryService.CreateCategory(category))
                 return InternalServerError();
 
             return Ok();
-        }
-
-        private CategoryService CreateCategoryService()
-        {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var categoryService = new CategoryService(userId);
-            return categoryService;
         }
 
         public IHttpActionResult Get(int id)
@@ -51,9 +43,9 @@ namespace ElevenNote.WebAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var service = CreateCategoryService();
+            var categoryService = CreateCategoryService();
 
-            if (!service.UpdateCategory(category))
+            if (!categoryService.UpdateCategory(category))
                 return InternalServerError();
 
             return Ok();
@@ -61,12 +53,18 @@ namespace ElevenNote.WebAPI.Controllers
 
         public IHttpActionResult Delete(int id)
         {
-            var service = CreateCategoryService();
+            var categoryService = CreateCategoryService();
 
-            if (!service.DeleteCategory(id))
+            if (!categoryService.DeleteCategory(id))
                 return InternalServerError();
 
             return Ok();
+        }
+
+        private CategoryService CreateCategoryService()
+        {
+            var categoryService = new CategoryService();
+            return categoryService;
         }
     }
 }

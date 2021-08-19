@@ -17,5 +17,12 @@ namespace ElevenNote.Models
 
         [MaxLength(8000)]
         public string Content { get; set; }
+
+        [Display(Name ="Date Created")]
+        public DateTimeOffset CreatedUtc { get; set; }
+
+        [Display(Name ="Category Name")]
+        public int CategoryID { get; set; }
+        public string CategoryName { get; set; }
     }
 }

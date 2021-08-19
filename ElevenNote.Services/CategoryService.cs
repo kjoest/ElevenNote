@@ -10,21 +10,14 @@ namespace ElevenNote.Services
 {
     public class CategoryService
     {
-        private readonly Guid _userId;
-
-        public CategoryService(Guid userId)
-        {
-            _userId = userId;
-        }
 
         public bool CreateCategory(CategoryCreate model)
         {
             var entity =
                 new Category()
                 {
-                    CategoriesID = _userId,
                     CategoryID = model.CategoryID,
-                    Name = model.Name
+                    CategoryName = model.CategoryName
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -46,7 +39,7 @@ namespace ElevenNote.Services
                                 new CategoryListItem
                                 {
                                     CategoryID = e.CategoryID,
-                                    Name = e.Name
+                                    CategoryName = e.CategoryName
                                 });
 
                 return query.ToArray();
@@ -66,7 +59,7 @@ namespace ElevenNote.Services
                     new CategoryDetail
                     {
                         CategoryID = entity.CategoryID,
-                        Name = entity.Name
+                        Name = entity.CategoryName
                     };
             }
         }
@@ -81,7 +74,7 @@ namespace ElevenNote.Services
                         .Single(e => e.CategoryID == model.CategoryID);
 
                 entity.CategoryID = model.CategoryID;
-                entity.Name = model.Name;
+                entity.CategoryName = model.CategoryName;
 
                 return ctx.SaveChanges() == 1;
             }
